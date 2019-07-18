@@ -3,7 +3,7 @@ body {
     width: 70%;
 }
 nav{
-    background-color: #d5d5d5
+    
 }
 footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
@@ -36,6 +36,7 @@ h3 {
 p {
     color: #333;
     font-size: 1em;
+    background-color: #d5d5d5
 }
 footer {
     border-top: 1px solid #d5d5d5;

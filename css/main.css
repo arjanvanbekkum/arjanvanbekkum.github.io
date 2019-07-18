@@ -7,7 +7,7 @@ footer ul {
     padding: 0px;
     list-style: none;
     font-weight: bold;
-    font-size: 12px
+    font-size: .8em
 }
 footer ul li {
     display: inline;
@@ -21,18 +21,18 @@ a:hover {
     text-decoration: underline;
 }
 h1 {
-    font-size: 16px;
+    font-size: 1.3em;
 }
 h2 {
-    font-size: 14px;
+    font-size: 1.2em;
 }
 h3 {
-    font-size: 12px;
+    font-size: 1.1em;
     font-weight: bold;
 }
 p {
     color: #333;
-    font-size: 12px
+    font-size: 1em;
 }
 footer {
     border-top: 1px solid #d5d5d5;

@@ -2,6 +2,9 @@ body {
     margin: 60px auto;
     width: 70%;
 }
+nav{
+    background-color: #d5d5d5
+}
 footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     padding: 0px;
@@ -73,6 +76,3 @@ nav ul  {
     background-color: #111;
   }
   
-  .active {
-    background-color: #4CAF50;
-  }

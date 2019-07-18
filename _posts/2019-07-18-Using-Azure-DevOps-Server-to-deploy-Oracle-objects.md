@@ -1,4 +1,4 @@
---
+---
 layout: post
 title: "Using Azure DevOp Server to deploy Oracle Objects"
 date: 2019-07-18

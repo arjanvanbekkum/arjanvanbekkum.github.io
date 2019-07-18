@@ -1,7 +1,6 @@
 body {
     margin: 60px auto;
     width: 70%;
-    font-size: 12px;
 }
 footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
@@ -33,6 +32,7 @@ h3 {
 }
 p {
     color: #333;
+    font-size: 12px
 }
 footer {
     border-top: 1px solid #d5d5d5;

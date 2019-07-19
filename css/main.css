@@ -40,9 +40,6 @@ footer {
     background-color: white; 
     padding: 14px 16px;
 }
-ul.posts { 
-    margin: 20px auto 40px; 
-}
 
 ul.posts li {
     list-style: none;

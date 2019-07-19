@@ -4,7 +4,6 @@ body {
     padding: 14px;
 }
 footer ul {
-    
     padding: 0px;
     list-style: none;
     font-weight: bold;
@@ -15,8 +14,8 @@ footer ul li {
     margin-right: 20px;
 }
 a {
+    color: #111;
     text-decoration: none;
-    color: white;
 }
 a:hover {
     text-decoration: underline;
@@ -91,6 +90,7 @@ nav ul  {
     background-color: #f8f8f8e0;
     padding: 5px 10px;
     margin: 20px 0;
+    border: 1px solid #d5d5d5;
   }
   
   .highlight pre {
@@ -103,8 +103,7 @@ nav ul  {
   code {
     font-family:'Bitstream Vera Sans Mono','Courier', monospace;
     font-size: 15px;
-    font-weight: bold;
-    border: 1px solid #d5d5d5;
+    
   }
 
 .lineno { padding-right: 24px; color: lighten(#333332,50);}

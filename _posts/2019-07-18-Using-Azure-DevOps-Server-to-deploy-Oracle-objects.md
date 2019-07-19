@@ -3,7 +3,7 @@ layout: post
 title: "Using Azure DevOp Server to deploy Oracle Objects"
 date: 2019-07-18
 ---
-Of course, CI/CD is the only way to deploy and release changes to production. But what if you are not using SQL Server but Oracle, are you able to use Azure DevOps? Of course, you are!
+CI/CD is the only way to deploy and release changes to production. But what if you are not using SQL Server but Oracle instead, are you able to use Azure DevOps? Of course, you are!
 
 
 I will try to show you how you can deploy your Oracle changes and place them in an Azure DevOps CI/CD pipeline without having to install an extension from the Marketplace. In this case, we are going to use the PowerShell on Remote machine task. 
@@ -15,7 +15,7 @@ First, we need a build definition to get our Oracle changes into the release pip
 The file should look something like this
 
 ```sql
-CREATE OR REPLACE PROCEDURE procedure_name( )
+CREATE OR REPLACE PROCEDURE procedure_name()
 IS
 BEGIN
    // your code goes here
@@ -131,7 +131,7 @@ BEGIN
   AND TABLE_NAME = <TABLE_NAME>
   AND COLUMN_NAME = <COL_NAME>
 ;
- 
+
   IF (V_COLUMN_EXISTS = 0) THEN
     EXECUTE IMMEDIATE 'ALTER TABLE <OWNER>.<TABLE_NAME> ADD <COL_NAME> VARCHAR2(1)';
   END IF;

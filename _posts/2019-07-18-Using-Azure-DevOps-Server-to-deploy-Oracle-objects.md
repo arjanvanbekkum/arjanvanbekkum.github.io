@@ -46,7 +46,7 @@ The login parameter has the format <UserName/Password>@<Database>. Beware of put
 
 You will need to take care of another thing. That is you have to add this PowerShell script to your build definition and your release pipeline. It is a best practice to put all the code in your build, including deployment scrips. You do not want (trust me) to rely on external resources for your deployment. We have added the PowerShell script to a different artifact folder, so to determine the correct Oracle folder we are adding some code to detect the correct path.
 
-```powershell 
+```powershell
 $invocation = (Get-Variable MyInvocation).Value
 $directorypath = Split-Path $invocation.MyCommand.Path
 $releaseStagingFolder = (get-item $directorypath ).parent.fullname 
@@ -55,7 +55,7 @@ $oracleStagingFolder="$releaseStagingFolder\Oracle\"
 
 Let's create our method that will push all the oracle scripts to the database. Using SQLPlus, we have to make sure we exit after running the script, so we need to wrap our file in and add some extra lines to exit the command prompt when done or receiving an error. But we also want the script to stop if the release fails and not deploy anything that will break our tests. Finally, we execute the statement using SQLPlus; if there is an error it will show in the Azure DevOps pipeline with the write-error method
 
-```powershell 
+```powershell
 function Invoke-SqlPlus($file, $logon) 
 {
     Write-Output "$file";
@@ -90,11 +90,11 @@ function Execute-Scripts($directory, $logon)
        }
     }
 }
-``'
+```
  
 That is all nice, but you probably have more than one folder (like Functions, Packages, Procedures) and you do not want to change the PowerShell script every time you add some folder to the Oracle folder (I sure did not). To run all this code, let's create the last piece of PowerShell to get all folders recursively and call the Execute-Script function for each folder. This last piece will run all the scripts within the subfolders first and then run the scripts in the root folder.
 
-```powershell 
+```powershell
 $items = @(Get-ChildItem $oracleStagingFolder -Recurse | ?{ $_.PSIsContainer } )
 
 foreach ($item in $items)
@@ -120,7 +120,7 @@ Oracle has (equal to SQL Server) a possibility to verify if objects already exis
  
 The script you create to add a column to a table will have to look something like below. We create a query to see if the column exists; if not, we add a new column; if it does, we do not add it again. This script can be run several times without breaking the pipeline. Of course, you can use the same methodology for indexes, constraints, functions, and procedures.
 
-```sql 
+```sql
 DECLARE
   V_COLUMN_EXISTS NUMBER := 0;  
 BEGIN

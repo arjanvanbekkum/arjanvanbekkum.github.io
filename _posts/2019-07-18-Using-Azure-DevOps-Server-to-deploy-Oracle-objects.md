@@ -14,7 +14,7 @@ First, we need a build definition to get our Oracle changes into the release pip
 
 The file should look something like this
 
-```SQL
+```sql
 CREATE OR REPLACE PROCEDURE procedure_name( )
 IS
 BEGIN
@@ -34,7 +34,7 @@ The next step is to create a PowerShell to deploy all these objects to the datab
 The PowerShell will be used on all our environments, so there no hardcoded reference to the database or servers. The login to the database will be an input parameter and thus be different for Test, Acceptance, or Production. 
 
 
-```PowerShell
+```powershell
 [CmdletBinding()] 
 param(
     [string]$logon

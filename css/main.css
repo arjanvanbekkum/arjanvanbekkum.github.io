@@ -1,7 +1,7 @@
 body {
     margin: 60px auto;
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    padding: 14px;
+    padding: 14px 16px;
 }
 footer ul {
     padding: 0px;
@@ -38,6 +38,7 @@ footer {
     border-top: 1px solid #d5d5d5;
     font-size: .8em;
     background-color: white; 
+    padding: 14px 16px;
 }
 ul.posts { 
     margin: 20px auto 40px; 
@@ -53,6 +54,7 @@ nav {
 
 div.container {
     background-color: white;  
+    padding: 14px 16px;
 }
 
 nav ul  {

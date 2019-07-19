@@ -93,14 +93,12 @@ nav ul  {
     border: 1px solid #d5d5d5;
   }
 
-.highlight.child {
-    border: none;
-}
   
 .highlight pre {
     /* overflow: scroll; Prefer no word wrap? Uncomment this line and comment out the 2 lines below. */
     word-break: break-all;
     word-wrap: break-word;
+    border: none;
 }
   
   code {

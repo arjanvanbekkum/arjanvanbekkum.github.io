@@ -1,7 +1,7 @@
 body {
     margin: 60px auto;
     font-family:'Verdana', 'Arial', 'Sans-Serif';
-    padding: 14px 16px;
+    /*padding: 14px 16px;*/
 }
 footer ul {
     padding: 0px;
@@ -81,6 +81,10 @@ nav ul  {
   nav ul li a:hover {
     color: #111;
     text-decoration: none;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   body {

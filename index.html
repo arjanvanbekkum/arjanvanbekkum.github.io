@@ -2,17 +2,16 @@
 layout: default
 title: Home
 ---
-<div class="row">
-	<div class="column left" style="background-color:#aaa;">
-	  
-	</div>
-	<div class="column middle" style="background-color:#bbb;">
-	  <h2>Cool intro</h2>
-	  <p>Some text..</p>
-	  
-	</div>
-	<div class="column right" style="background-color:#ccc;">
-	  <h2>Blog links</h2>
-	  <p>Some text..</p>
-	</div>
-  </div>
+<ul class="posts">
+		{% for post in site.posts %}
+ 			<div class="card">
+					<a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+					<h5>{{ post.date | date_to_string }}</h5>
+					<div class="fakeimg" style="height:200px;">Image</div>
+					<p>Some text..</p>
+			</div>
+	  {% endfor %}
+	</ul>
+  
+
+

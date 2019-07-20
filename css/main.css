@@ -1,6 +1,6 @@
 body {
     margin: 60px auto;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    font-family:'Verdana', 'Arial', 'Sans-Serif';
     padding: 14px 16px;
 }
 footer ul {
@@ -35,7 +35,7 @@ p {
     font-size: 1em;
 }
 footer {
-    border-top: 1px solid #d5d5d5;
+    border-top: 2px solid #d5d5d5;
     font-size: .8em;
     background-color: white; 
     padding: 14px 16px;
@@ -45,8 +45,12 @@ ul.posts li {
     list-style: none;
 }
 
+ul.post {
+  padding: 0px;
+}
+
 nav {
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 2px solid #d5d5d5;
 }
 
 div.container {

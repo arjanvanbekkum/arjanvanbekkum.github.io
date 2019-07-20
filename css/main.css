@@ -46,7 +46,7 @@ ul.posts li {
 }
 
 ul.post {
-  padding: 0px;
+  padding-inline-start: 0px;
 }
 
 nav {

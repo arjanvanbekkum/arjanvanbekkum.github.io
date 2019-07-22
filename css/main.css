@@ -15,7 +15,7 @@ footer ul li {
 }
 a {
     color: #111;
-    text-decoration: none;
+    text-decoration: underline;
 }
 a:hover {
     text-decoration: underline;
@@ -92,13 +92,40 @@ nav ul  {
     padding: 20px;
     background: #f1f1f1;
   }
+
+  .card ul {
+    padding: 4px;
+    list-style: none;
+    font-size: 1em
+}
+
+.follow ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.follow li {
+  float: left;
+  margin: 4px;
+}
   
   /* Header/Blog Title */
   .header {
-    padding: 30px;
+    padding: 8px;
     font-size: 40px;
     text-align: center;
     background: white;
+    width:100%;
+    height:350px;
+    opacity: .5;
+    overflow:hidden;
+    background-image: url(../images/header.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
   }
   
   /* Create two unequal columns that floats next to each other */
@@ -117,9 +144,8 @@ nav ul  {
   
   /* Fake image */
   .fakeimg {
-    background-color: #aaa;
     width: 100%;
-    padding: 20px;
+    padding: 4px;
   }
   
   /* Add a card effect for articles */

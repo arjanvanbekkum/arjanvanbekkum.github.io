@@ -42,8 +42,10 @@ footer {
 
 ul.posts li {
     list-style: none;
-    padding-inline-start: 0px;
+}
 
+.posts ul {
+  padding-inline-start: 0px;
 }
 
 nav {

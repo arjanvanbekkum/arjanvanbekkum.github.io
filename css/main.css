@@ -1,7 +1,6 @@
 body {
     margin: 60px auto;
     font-family:'Verdana', 'Arial', 'Sans-Serif';
-    /*padding: 14px 16px;*/
 }
 footer ul {
     padding: 0px;
@@ -43,6 +42,8 @@ footer {
 
 ul.posts li {
     list-style: none;
+    padding-inline-start: 0px;
+
 }
 
 nav {

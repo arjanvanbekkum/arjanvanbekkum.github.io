@@ -5,19 +5,18 @@ body {
     background: #f1f1f1;
 }
 
-footer ul {
+.footer ul {
     padding: 0px;
     list-style: none;
     font-weight: bold;
     font-size: .8em
 }
-footer ul li {
+.footer ul li {
     display: inline;
     margin-right: 20px;
 }
-footer {
+.footer {
   border-top: 2px solid #d5d5d5;
-  font-size: .8em;
   background-color: white; 
   padding: 14px 16px;
 }
@@ -47,6 +46,10 @@ p {
 
 ul.posts li {
     list-style: none;
+}
+
+ul.post {
+  padding-inline-start: 0px;
 }
 
 nav {
@@ -125,8 +128,29 @@ nav ul  {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
 
   }
+
+
+  /* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
   
   /* Create two unequal columns that floats next to each other */
   /* Left column */
@@ -165,7 +189,7 @@ nav ul  {
   /* Footer */
   .footer {
     padding: 20px;
-    text-align: center;
+    text-align: left;
     background: #ddd;
     margin-top: 20px;
   }

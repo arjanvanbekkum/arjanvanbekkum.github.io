@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using Azure DevOp Server to deploy Oracle Objects"
+title: "Using Azure DevOps Server to deploy Oracle Objects"
 date: 2019-07-18
 summary: "How to deploy your Oracle objects using just powershell and Azure DevOps. By using the Oracle client you will be able to deploy objects and scripts without having to install
 an exention from the marketplace"

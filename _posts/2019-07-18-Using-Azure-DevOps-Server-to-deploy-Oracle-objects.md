@@ -94,7 +94,7 @@ function Execute-Scripts($directory, $logon)
     }
 }
 ```
- 
+
 That is all nice, but you probably have more than one folder (like Functions, Packages, Procedures) and you do not want to change the PowerShell script every time you add some folder to the Oracle folder (I sure did not). To run all this code, let's create the last piece of PowerShell to get all folders recursively and call the Execute-Script function for each folder. This last piece will run all the scripts within the subfolders first and then run the scripts in the root folder.
 
 ```powershell
@@ -119,9 +119,9 @@ EXECUTE DBMS_UTILITY.compile_schema(schema => 'schema_name');
 ```
 
 The second thing we need to solve is how are we going to add or drop a column or index or even a procedure. What will happen if we add a column to a table and we want to deploy our script multiple times, we have to think of something to fix this. Because if we don't, the release will fail if the column does not exist and we try to drop it or if we want to add it and it already exists.
-Oracle has (equal to SQL Server) a possibility to verify if objects already exist, you can use de ALL_* views to make a query and check whether the object already exists. For example, use the ALL_PROCEDURES and ALL_TAB_COLS to verify Stored Procedures and Columns. 
+Oracle has (equal to SQL Server) a possibility to verify if objects already exist, you can use de ALL_* views to make a query and check whether the object already exists. For example, use the ALL_PROCEDURES and ALL_TAB_COLS to verify Stored Procedures and Columns.
 
- 
+
 The script you create to add a column to a table will have to look something like below. We create a query to see if the column exists; if not, we add a new column; if it does, we do not add it again. This script can be run several times without breaking the pipeline. Of course, you can use the same methodology for indexes, constraints, functions, and procedures.
 
 ```sql

@@ -12,7 +12,7 @@ Directory for user authentication you can use groups and turn them into policies
 ## Authentication Flow
 The flow for the authentication consists of a few steps, in general it will look something like this:
 
-<img src="../images/authenticationflow.png" alt="authentication flow" width="400"/>
+<img src="/images/authenticationflow.png" alt="authentication flow" width="400"/>
 
 
 1. Use the keys from the Client APP and the resource from the WebAPI to send a request for a token from Azure AD. 

@@ -1,7 +1,28 @@
 <!doctype HTML>
 <html>
 
-
+        <script>
+                AFRAME.registerComponent('vidhandler', {
+                    // ...
+                    init: function () {
+                        // Set up initial state and variables.
+                        this.toggle = false;
+                        this.vid = document.querySelector("#BS0i6")
+                        this.vid.pause();
+                    },
+                    tick: function () {
+                        if (this.el.object3D.visible == true) {
+                            if (!this.toggle) {
+                                this.toggle = true;
+                                this.vid.play();
+                            }
+                        } else {
+                            this.toggle = false;
+                            this.vid.pause();
+                        }
+                    }
+                });
+            </script>
 
 
 <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
@@ -24,6 +45,8 @@
 
     <a-assets>
             <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/NielsNijveldt/nielsnijveldt.github.io/master/scene.gltf"></a-asset-item>
+            
+            <video crossorigin="true" id="BS0i6" autoplay loop="true" type="video/mp4" preload="auto" src="https://armagazine.azurewebsites.net/images/video.mp4">  
         </a-assets>
 
     <a-marker type="pattern" preset="custom" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/Patterns/pattern-xp_3.patt">
@@ -35,12 +58,8 @@
     </a-marker>
 
 
-     <a-assets>
-        <video crossorigin="true" id="BS0i6" autoplay loop="true" type="video/mp4" src="https://armagazine.azurewebsites.net/images/video.mp4">
-        <!-- add video here -->     
-    </a-assets> 
     
-    <a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/Patterns/pattern-xp_1.patt">
+    <a-marker vidhandler preset="custom" type="pattern" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/Patterns/pattern-xp_1.patt">
         <a-video src="#BS0i6" width="1.4375" height="1" rotation="270 0 0"></a-video>
     </a-marker>
            <!-- add marker here -->

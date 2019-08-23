@@ -1,18 +1,50 @@
 <!doctype HTML>
 <html>
-<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+        <head>
+                <!-- AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js - info: https://medium.com/arjs/augmented-reality-in-10-lines-of-html-4e193ea9fdbf -->
+                <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+                <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
+                <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.4/dist/aframe-extras.min.js"></script>
+                <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+                <script>
+                    AFRAME.registerComponent('vidhandler', {
+                        // ...
+                        init: function () {
+                            // Set up initial state and variables.
+                            this.toggle = false;
+                            this.vid = document.querySelector("#vid")
+                            this.vid.pause();
+                        },
+                        tick: function () {
+                            if (this.el.object3D.visible == true) {
+                                if (!this.toggle) {
+                                    this.toggle = true;
+                                    this.vid.play();
+                                }
+                            } else {
+                                this.toggle = false;
+                                this.vid.pause();
+                            }
+                        }
+                    });
+                </script>
+             </head>
+
  <body style='margin : 0px; overflow: hidden;'>
    
-    <a-scene embedded arjs>
-        <a-assets>
-            <video id="vid" src="https://cdn.glitch.com/b62367d1-ceab-454b-b664-b032f995ed86%2FBig_Buck_Bunny_Trailer_1080p.ogv.720p.webm?1532370072191" loop="true" crossorigin >
-        </a-assets>
+        <a-scene embedded arjs='trackingMethod: best; patternRatio: 0.8; debugUIEnabled: false;' hidden>
+                <a-assets>
+                  <a-assets-item id="video" src="https://cdn.glitch.com/b62367d1-ceab-454b-b664-b032f995ed86%2FBig_Buck_Bunny_Trailer_1080p.ogv.720p.webm?1532370072191"></a-assets-item>
+                </a-assets>
+                    <a-marker emitevents="true" id="marker" type="pattern" preset="custom" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/Patterns/pattern-xp_1.patt" vidhandler>
+                       <a-plane id="vid" src="#video" rotation="-90 0 0" width="1.6" height="0.8"></a-plane> 
+                    </a-marker>
+                    <a-entity camera></a-entity> 
+              </a-scene>
 
-    <a-marker type="pattern" preset="custom" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/Patterns/pattern-xp_1.patt">
-        <a-video  position="0 0.2 0" src="#vid" rotation="90 180 0"></a-video>
-    </a-marker>
-    
+
+
+
     <a-marker type="pattern" preset="custom" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/Patterns/pattern-xp_3.patt">
         <a-box position='0 0.5 0' material='opacity: 0.5; side: double'>
 			<a-torus-knot radius='0.26' radius-tubular='0.05'>

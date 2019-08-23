@@ -13,9 +13,11 @@
         <a-box position='0 0.5 0' material='color: yellow;'></a-box>
     </a-marker>
     <a-marker type="pattern" preset="custom" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/Patterns/pattern-xp_3.patt">
-        <a-assets>
-            <a-asset-item id="animated-asset" src="https://armagazine.azurewebsites.net/images/video.mp4"></a-asset-item>
-        </a-assets>
+        <a-box position='0 0.5 0' material='opacity: 0.5; side: double'>
+			<a-torus-knot radius='0.26' radius-tubular='0.05'>
+				<a-animation attribute="rotation" to="360 0 0" dur="3000" easing='linear' repeat="indefinite"></a-animation>
+			</a-torus-knot>
+		</a-box>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>

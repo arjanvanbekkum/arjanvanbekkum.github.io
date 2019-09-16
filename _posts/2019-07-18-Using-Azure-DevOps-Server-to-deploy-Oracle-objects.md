@@ -2,8 +2,7 @@
 layout: post
 title: "Using Azure DevOps Server to deploy Oracle Objects"
 date: 2019-07-18
-summary: "How to deploy your Oracle objects using just powershell and Azure DevOps. By using the Oracle client you will be able to deploy objects and scripts without having to install
-an exention from the marketplace"
+summary: "How to deploy your Oracle objects using just powershell and Azure DevOps. By using the Oracle client you will be able to deploy objects and scripts without having to install an extension from the marketplace"
 ---
 CI/CD is the only way to deploy and release changes to production. But what if you are not using SQL Server but Oracle instead, are you able to use Azure DevOps? Of course, you are!
 
@@ -24,7 +23,7 @@ BEGIN
 END
 ```
 
-Because we want to deploy and redeploy the Oracle objects, we need the "OR REPLACE." If you would only use the CREATE statement, the deployment will fail if the object already exists. This statement also goes for all the objects you wish to deploy. 
+Because we want to deploy and redeploy the Oracle objects, we need the `OR REPLACE`. If you would only use the `CREATE` statement, the deployment will fail if the object already exists. This statement also goes for all the objects you wish to deploy. 
 
 
 After exporting all the objects from the Oracle database to files on your system, you have to add them to your version control system (e.g., GIT of TFVC). After adding them to your version control, you have to modify the build and make sure all the files are added as artifacts to your build definition. If not, you will not be able to deploy them in the release pipeline.
@@ -44,7 +43,7 @@ param(
 ) 
 ```
 
-The login parameter has the format UserName/Password@Database. Beware of putting hard coded passwords into your pipeline our in your scripts. We have used an Active Directory Account to connect to the database, so no username or password was provided in either the pipeline or the scripts. Make sure you set the "External Identified" flag on the user in the Oracle database if you use an Active Directory user. After creating the user, make sure it has permissions to create objects in the database, you will probably need the DBA role or create a new one if you please.
+The login parameter has the format `UserName/Password@Database`. Beware of putting hard coded passwords into your pipeline our in your scripts. We have used an Active Directory Account to connect to the database, so no username or password was provided in either the pipeline or the scripts. Make sure you set the "External Identified" flag on the user in the Oracle database if you use an Active Directory user. After creating the user, make sure it has permissions to create objects in the database, you will probably need the DBA role or create a new one if you please.
 
 
 You will need to take care of another thing. That is you also have to add this PowerShell script to your build definition and your release pipeline. It is a best practice to put all the code in your build, including deployment scrips. You do not want (trust me) to rely on external resources for your deployment. We have added the PowerShell script to a different artifact folder, so to determine the correct Oracle folder we are adding some code to detect the correct path.
@@ -119,7 +118,7 @@ EXECUTE DBMS_UTILITY.compile_schema(schema => 'schema_name');
 ```
 
 The second thing we need to solve is how are we going to add or drop a column or index or even a procedure. What will happen if we add a column to a table and we want to deploy our script multiple times, we have to think of something to fix this. Because if we don't, the release will fail if the column does not exist and we try to drop it or if we want to add it and it already exists.
-Oracle has (equal to SQL Server) a possibility to verify if objects already exist, you can use de ALL_* views to make a query and check whether the object already exists. For example, use the ALL_PROCEDURES and ALL_TAB_COLS to verify Stored Procedures and Columns.
+Oracle has (equal to SQL Server) a possibility to verify if objects already exist, you can use de `ALL_*` views to make a query and check whether the object already exists. For example, use the `ALL_PROCEDURES` and `ALL_TAB_COLS` to verify Stored Procedures and Columns.
 
 
 The script you create to add a column to a table will have to look something like below. We create a query to see if the column exists; if not, we add a new column; if it does, we do not add it again. This script can be run several times without breaking the pipeline. Of course, you can use the same methodology for indexes, constraints, functions, and procedures.

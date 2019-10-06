@@ -63,11 +63,11 @@ Scan the marker using your phone or webcam, and the 3D model shows, moving the c
 
 You can try it here, scan the QR code to go this page on your phone, allow access to the camera and you are ready to go
 
-<img src="../images/qr.png" alt="QR" width="200"/>
+<img src="/images/qr.png" alt="QR" width="200"/>
 
 Next, scan this marker to display the knot in a box. 
 
-<img src="../images/epicshitmarker.png" alt="epic shit marker" width="200"/>
+<img src="/images/epicshitmarker.png" alt="epic shit marker" width="200"/>
 
 ## video
 Creating a video is almost the same as creating the 3D model. To display the video, we use the asset we just added to our page. Create another marker with a different pattern. The marker needs an extra attribute to make the video play when scanning the marker. It needs to look like this.
@@ -108,7 +108,7 @@ This code registers a component on the page, making the video play automatically
 ```
 This will work exactly the same as the 3D model, scan this marker to play the video. 
 
-<img src="../images/xmarker.png" alt="x-marker" width="200"/>
+<img src="/images/xmarker.png" alt="x-marker" width="200"/>
 
 ## 3D animated model
 The coolest thing about AR is you can use it to combine the real world with models. It gets even more cooler when the models "come to live" and can walk around on your table. To add an animated 3D model to our scene you have to create one online. We use a gltf model in the new marker. In this case we use the `hiro` marker in the AR.js library; this is a predefined one. 
@@ -121,7 +121,7 @@ The coolest thing about AR is you can use it to combine the real world with mode
 
 You can use all kinds of attributes to scale or rotate the model, but also use `loop` and `position` to customize the model. So scan this marker to display the animated 3D model and make it walk around a little.  
 
-<img src="../images/HIRO.jpg" alt="hiro maker" width="200"/>
+<img src="/images/HIRO.jpg" alt="hiro maker" width="200"/>
 
 We found that it was no that hard to use this library and enjoyed playing around a little.  
 

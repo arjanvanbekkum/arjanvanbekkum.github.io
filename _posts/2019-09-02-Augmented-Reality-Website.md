@@ -63,7 +63,7 @@ Scan the marker using your phone or webcam, and the 3D model shows, moving the c
 
 You can try it here, scan the QR code to go this page on your phone, allow access to the camera and you are ready to go
 
-`<add qr code>`
+<img src="../images/qr.png" alt="QR" width="200"/>
 
 Next, scan this marker to display the knot in a box. 
 

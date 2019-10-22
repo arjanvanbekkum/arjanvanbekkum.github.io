@@ -43,9 +43,18 @@ p {
     font-size: 1em;
 }
 
-p.crumb {
-  color: #333;
-  font-size: 0.5em;
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+
+}
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+ul.breadcrumb li+li:before {
+  padding: 4px;
+  content: ">\00a0";
 }
 
 

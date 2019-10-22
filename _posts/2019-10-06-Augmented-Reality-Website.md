@@ -3,6 +3,7 @@ layout: post
 title: "Augmented Reality with javascript"
 date: 2019-10-06
 summary: "This blog is about how to use AR.js in a website and showing some cool features of Augmented Reality."
+minute: 4
 ---
 
 Augmented Reality is becoming the next best thing when creating apps and websites. More and more companies are using it to create the next level of experience. How hard is it to get started on AR, what do you need and how does it work in general. All questions we had before we started, it seems there are many libraries on the internet to get you started. We decided to keep it relatively easy and create a website.

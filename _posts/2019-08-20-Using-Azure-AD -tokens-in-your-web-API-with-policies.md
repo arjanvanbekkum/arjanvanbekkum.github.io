@@ -3,6 +3,7 @@ layout: post
 title: "Using Azure AD (V1.0) tokens in your web API with policies."
 date: 2019-08-20
 summary: "How to use Azure AD tokens with Azure AD groups and turn them into policies in your .NET Core web API to get a more fine-grained security model. This post uses Azure AD V1.0."
+minute: 6
 ---
 
 When creating a web API, adding security is one of your main concerns. If you have more then one controller in the API or want a more detailed 

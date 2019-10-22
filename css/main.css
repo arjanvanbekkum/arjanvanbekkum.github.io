@@ -50,7 +50,7 @@ ul.breadcrumb {
 }
 ul.breadcrumb li {
   display: inline;
-  font-size: 12px;
+  font-size: 12Ppx;
 }
 ul.breadcrumb li+li:before {
   padding: 4px;

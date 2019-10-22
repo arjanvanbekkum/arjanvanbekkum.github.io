@@ -43,6 +43,11 @@ p {
     font-size: 1em;
 }
 
+.clock {
+  color: #333;
+  font-size: 0.8em;
+}
+
 
 ul.posts li {
     list-style: none;

@@ -17,7 +17,7 @@
                 if (this.el.object3D.visible == true) {
                     if (!this.toggle) {
                         this.toggle = true;
-                        this.vid.play();
+                        this.vid.click();
                     }
                 } else {
                     this.toggle = false;
@@ -27,7 +27,7 @@
         });
     </script>
     <script>
-        window.addEventListener('change', function () {
+        window.addEventListener('click', function () {
         var v = document.querySelector('#BS0i6');
         v.play();
         });

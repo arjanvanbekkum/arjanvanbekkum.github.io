@@ -34,7 +34,7 @@
         
 <a-assets>
     <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/scene.gltf"></a-asset-item>
-    <video crossorigin="anonymous" id="BS0i6" controls="true" autoplay loop="true" type="video/mp4" preload="auto" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/sw.mp4">  
+    <video crossorigin="anonymous" id="BS0i6" controls="true" autoplay loop="true" type="video/mp4" preload="auto" muted="true" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/sw.mp4">  
 </a-assets>
 
 <a-marker type="pattern" preset="custom" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/epicshit.patt">
@@ -46,7 +46,7 @@
 </a-marker>
 
 <a-marker vidhandler preset="custom" type="pattern" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/xmarker.patt">
-    <a-video src="#BS0i6" width="1.4375" height="1" rotation="270 0 0"></a-video>
+    <a-video src="#BS0i6" position="0 0.5 0" rotation="270 0 0" play="true"></a-video>
 </a-marker>
 
 <a-marker id="memarker" preset="hiro">
@@ -56,6 +56,13 @@
 <a-entity camera></a-entity>
 
 </a-scene>
+
+<script>
+    window.addEventListener('click', function () {
+    var v = document.querySelector('#BS0i6');
+    v.play();
+    });
+  </script>
   
  </body>
 </html>

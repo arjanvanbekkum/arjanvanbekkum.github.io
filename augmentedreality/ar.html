@@ -42,7 +42,7 @@ function myFunction() {
         
 <a-assets>
     <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/scene.gltf"></a-asset-item>
-    <video crossorigin="anonymous" id="BS0i6" controls="true" autoplay="true" loop="true" type="video/mp4" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/sw.mp4">  
+    <video onshow="myFunction()" crossorigin="anonymous" id="BS0i6" controls="true" autoplay="true" loop="true" type="video/mp4" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/sw.mp4">  
 </a-assets>
 
 <a-marker type="pattern" preset="custom" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/epicshit.patt">
@@ -54,7 +54,7 @@ function myFunction() {
 </a-marker>
 
 <a-marker vidhandler preset="custom" type="pattern" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/xmarker.patt">
-    <a-video onshow="myFunction()" src="#BS0i6" position="0 0.5 0" rotation="270 0 0" play="true" width=2 height=2 ></a-video>
+    <a-video  src="#BS0i6" position="0 0.5 0" rotation="270 0 0" play="true" width=2 height=2 ></a-video>
 </a-marker>
 
 <a-marker id="memarker" preset="hiro">

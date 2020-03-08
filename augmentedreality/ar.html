@@ -27,7 +27,6 @@
         });
     </script>
 
-    var event = new CustomEvent("playvideo", { "detail": "Example of an event" });
 
 </head>
 
@@ -37,7 +36,7 @@
         
 <a-assets>
     <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/scene.gltf"></a-asset-item>
-    <video onload=document.dispatchEvent(playvideo) crossorigin="anonymous" id="BS0i6" controls="true" autoplay="true" loop="true" type="video/mp4" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/sw.mp4">  
+    <video onload="document.getElementById('add_redirect').click();" crossorigin="anonymous" id="BS0i6" controls="true" autoplay="true" loop="true" type="video/mp4" src="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/sw.mp4">  
 </a-assets>
 
 <a-marker type="pattern" preset="custom" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/epicshit.patt">

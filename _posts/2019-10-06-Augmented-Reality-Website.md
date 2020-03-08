@@ -111,6 +111,19 @@ This will work exactly the same as the 3D model, scan this marker to play the vi
 
 <img src="/images/xmarker.png" alt="x-marker" width="200"/>
 
+Apple requires user interaction to play a video if you are using IOS 11 (or higher). Add the following lines of code at the bottom of the page
+
+```html
+<script>
+    window.addEventListener('click', function () {
+    var v = document.querySelector('#BS0i6');
+    v.play();
+    });
+</script>
+```
+
+This will play the video when you tap the "black" box where the video is suppose to run
+
 ## 3D animated model
 The coolest thing about AR is you can use it to combine the real world with models. It gets even more cooler when the models "come to live" and can walk around on your table. To add an animated 3D model to our scene you have to create one online. We use a gltf model in the new marker. In this case we use the `hiro` marker in the AR.js library; this is a predefined one. 
 

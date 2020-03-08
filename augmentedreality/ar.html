@@ -17,7 +17,7 @@
                 if (this.el.object3D.visible == true) {
                     if (!this.toggle) {
                         this.toggle = true;
-                        this.vid.click();
+                        this.vid.play();
                     }
                 } else {
                     this.toggle = false;
@@ -25,6 +25,12 @@
                 }
             }
         });
+
+        // On mouse-over, execute myFunction
+function myFunction() {
+  document.getElementById("BS0i6").click();
+}
+
     </script>
 
 
@@ -48,7 +54,7 @@
 </a-marker>
 
 <a-marker vidhandler preset="custom" type="pattern" url="https://raw.githubusercontent.com/arjanvanbekkum/arjanvanbekkum.github.io/master/augmentedreality/xmarker.patt">
-    <a-video src="#BS0i6" position="0 0.5 0" rotation="270 0 0" play="true" width=2 height=2 ></a-video>
+    <a-video onshow="myFunction()" src="#BS0i6" position="0 0.5 0" rotation="270 0 0" play="true" width=2 height=2 ></a-video>
 </a-marker>
 
 <a-marker id="memarker" preset="hiro">
@@ -60,7 +66,7 @@
 </a-scene>
 
 <script>
-    window.addEventListener('show', function () {
+    window.addEventListener('click', function () {
     var v = document.querySelector('#BS0i6');
     v.play();
     });

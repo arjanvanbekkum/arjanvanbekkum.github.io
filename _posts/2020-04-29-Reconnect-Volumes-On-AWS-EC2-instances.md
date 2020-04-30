@@ -149,7 +149,8 @@ The last step is to set the system label by calling the `set-volume` method and 
     if ($disk.OperationalStatus -eq "Offline")
     {
         Set-Disk -Number $disk.Number -IsOffline $False
-        $currentDrive = get-partition -DiskNumber $disk.Number| Where-Object { $_.Type -ne "Reserved" } | Select-Object -Expand DriveLetter
+        $currentDrive = get-partition -DiskNumber $disk.Number| Where-Object { $_.Type -ne "Reserved" } 
+          | Select-Object -Expand DriveLetter
         if ( ($currentDrive -ne $DriveLetter) -and ($DriveLetter) -and ($currentDrive) )
         {
             Get-Partition -DriveLetter $currentDrive | Set-Partition -NewDriveLetter $DriveLetter

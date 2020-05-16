@@ -2,8 +2,8 @@
 layout: post
 title: "Reconnect Volumes On AWS EC2 instances."
 date: 2020-04-29
-summary: "When working with data disk on EC2 instances (or virtual machines) you do not want the restore the data when creating a new instance. This blog is about reconnecting the already available volumes in AWS with instances running on Windows."
-minute: 8
+summary: "When working with data disks on EC2 instances (or virtual machines) you do not want the restore the data when creating a new instance. This blog is about reconnecting the already available volumes in AWS with instances running on Windows."
+minute: 10
 ---
 
 Recently I have work on an AWS project. We had to create EC2 instances (virtual machines if you like Azure) running Windows server. The problem we ran into was that one of these machines had disks in a particular order with fixed disk drive letters. Also, we had to make sure the data on the drives were kept and could be reused when creating a new instance.

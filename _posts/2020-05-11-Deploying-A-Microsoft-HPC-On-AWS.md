@@ -2,7 +2,7 @@
 layout: post
 title: "Deploying a Microsoft High Performance Cluster on AWS using Infrastructure as Code AWS CodeBuild pipelines."
 date: 2020-05-16
-summary: "."
+summary: "When running a HPC on AWS you want to use CloudFormation templates to create any instance needed to run the HPC cluster. HPC needs a SQL Server, Headnode(s) and ComputeNodes, we will create template and script for all the components needed to run an High Performance Cluster on Amazon Web Services"
 minute: 30
 ---
 

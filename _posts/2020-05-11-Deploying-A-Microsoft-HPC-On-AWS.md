@@ -14,21 +14,21 @@ You can find more information about HPC on the <a href ="https://docs.microsoft.
 
 When running on Microsoft Azure, you can use the ARM templates provided by Microsoft to install an HPC. You can also use the PowerShell scripts on the internet to install HPC on Virtual Machines manually. You can log on to a VM and install everything as an administrator. Nowadays, we want to use Infrastructure as Code and use scripts and pipelines to install Infrastructure like Virtual Machines on Microsoft Azure or EC2 Instances on Amazon Web Services (AWS). This way, we can redeploy the same setup on each new environment without worrying about run-book, differences, and manual errors. 
 
-In this blog, you will learn about deploying an HPC on AWS using `CloudFormation` templates (in YAML) and PowerShell scripts. I will highlight some things to remember when installing an HPC. 
+In this blog, you will learn about deploying an HPC on AWS using CloudFormation templates (in YAML) and PowerShell scripts. I will highlight some things to remember when installing an HPC. 
 
-# `CloudFormation` templates
+# CloudFormation templates
 
-When you want to use infrastructure as code to deploy EC2 instances on AWS, you can use `CloudFormation` files (in YAML). You can use it to deploy separate instances by creating a template for one single EC2 instance. You can also use an `Auto Scaling Group,` where you can deploy multiple instances at the same time. You can define a minimum and a maximum number of instances. AWS will make sure there is always a minimal number of instances running. We will create three `Auto Scaling Groups` for running our `SQL Server`, to run the `HeadNode` and the `ComputeNodes.`  
+When you want to use infrastructure as code to deploy EC2 instances on AWS, you can use CloudFormation files (in YAML). You can use it to deploy separate instances by creating a template for one single EC2 instance. You can also use an Auto Scaling Group, where you can deploy multiple instances at the same time. You can define a minimum and a maximum number of instances. AWS will make sure there is always a minimal number of instances running. We will create three Auto Scaling Groups for running our SQL Server, to run the HeadNode and the ComputeNodes.  
 
-To install the HPC software, we will use the `user data` option in the `CloudFormation` templates. This will install the software when the machine is booted; we will create scripts to make sure this is only installed and configured when it is not installed yet. If the installation fails, we can just terminate the instance, and the autoscaling group will automatically start a new instance.   
+To install the HPC software, we will use the `user data` option in the CloudFormation templates. This will install the software when the machine is booted; we will create scripts to make sure this is only installed and configured when it is not installed yet. If the installation fails, we can just terminate the instance, and the auto scaling group will automatically start a new instance.   
 
-Before we can install the HPC software, we need to make sure it is available on the instances. We used Packer to create `Amazon Machine Images (AMI)` and used `Chocolately` to install the `AWS Command Line Interface.` With this CLI, we can use run AWS instructions to copy software from an `S3 Bucket` to our AMI. 
+Before we can install the HPC software, we need to make sure it is available on the instances. We used Packer to create `Amazon Machine Images (AMI)` and used `Chocolately` to install the AWS Command Line Interface. With this CLI, we can use run AWS instructions to copy software from an `S3 Bucket` to our AMI. 
 
-The HPC has three components we need to install, a `Microsoft SQL Server,` one or multiple `HeadNodes` and, one or more `ComputeNodes.` 
+The HPC has three components we need to install, a Microsoft SQL Server, one or multiple HeadNodes and, one or more ComputeNodes. 
 
 # SQL Server 
 
-The first thing we need is a running `Microsoft SQL Server` Instance. We used the `Microsoft SQL Server` AMI provided by Microsoft on AWS to create an AMI, which we will use to create our database server. Like we mentioned before, we installed AWS CLI on the AMI. Because we use an AMI with SQL Server already installed, we do not need to worry about installing the SQL Server software.  
+The first thing we need is a running Microsoft SQL Server Instance. We used the Microsoft SQL Server AMI provided by Microsoft on AWS to create an AMI, which we will use to create our database server. Like we mentioned before, we installed AWS CLI on the AMI. Because we use an AMI with SQL Server already installed, we do not need to worry about installing the SQL Server software.  
 
 When downloading the HPC Pack software, Microsoft provides Powershell scripts to create and install the database on the SQL Server instance. But the instructions require you to log in to the machine and run the scripts as an administrator using Powershell. We changed the scripts for creating the database a little. We want to create the database just once on the first time we create the SQL Server, the next time we create a SQL instance we want to reuse the database and not restart all over again. We will create the database on the D-drive and use a different volume. You can reuse the volumes on AWS instances, find out how by using <a href="https://arjanvanbekkum.github.io/blog/2020/04/29/Reconnect-Volumes-On-AWS-EC2-instances">this</a> blog I wrote  
 
@@ -101,7 +101,7 @@ EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServe
     N'LoginMode', REG_DWORD, 2 
 ```
 
-The last step for the SQL server is to connect all the pieces and create a PowerShell we can use to run in the `UserData` option in the `CloudFormation` template. This PowerShell will run our SQL script on the SQL server itself, so we can simply use `localhost` to connect.  
+The last step for the SQL server is to connect all the pieces and create a PowerShell we can use to run in the `UserData` option in the CloudFormation template. This PowerShell will run our SQL script on the SQL server itself, so we can simply use `localhost` to connect.  
 
 ### Creating the users
 
@@ -137,9 +137,9 @@ foreach($hpcdb in $hpcDBs)
 }
 ```
 
-### Setting up `CloudFormation` template yaml
+### Setting up CloudFormation template yaml
 
-We need to make sure this PowerShell scripts run every time we boot our SQL server instance. To make that happen, we will add these scripts to the `UserData` option of the `LaunchTemplate` in the `CloudFormation` file. We have created a `createdisks.ps1` script to connect the disks every time we reboot our server, you can find the link to the blog earlier in this blog. Setting the `persist` tag to true will ensure this script will run every time the instance is booted.
+We need to make sure this PowerShell scripts run every time we boot our SQL server instance. To make that happen, we will add these scripts to the `UserData` option of the `LaunchTemplate` in the CloudFormation file. We have created a `createdisks.ps1` script to connect the disks every time we reboot our server, you can find the link to the blog earlier in this blog. Setting the `persist` tag to true will ensure this script will run every time the instance is booted.
 
 ```yaml
   LaunchTemplate:
@@ -282,7 +282,7 @@ $ClusterName = "HeadNode.mydomain.com"
 $SQLServerInstance = "mssql.mydomain.com"
 ```
 
-Let's pass this information into one big `ArgumentList`. We need to tell the HPC Pack software we want to install the HeadNode version of the software, and we want to run without any user interaction, so the first two parameters are `-unattend` and `-HeadNode`. We will add a name to our cluster using the DNS HeadNode entry we will create in our `CloudFormation` file. For the installation, we need the just created certificate and the password we used to export the certificate to disk. 
+Let's pass this information into one big `ArgumentList`. We need to tell the HPC Pack software we want to install the HeadNode version of the software, and we want to run without any user interaction, so the first two parameters are `-unattend` and `-HeadNode`. We will add a name to our cluster using the DNS HeadNode entry we will create in our CloudFormation file. For the installation, we need the just created certificate and the password we used to export the certificate to disk. 
 
 ```powershell
 $setupArg = "-unattend -HeadNode -ClusterName:$ClusterName -SSLPfxFilePath:$certpath -SSLPfxFilePassword:$certificate_password"
@@ -319,7 +319,7 @@ if($p.ExitCode -eq 3010)
 
 ### Configure the HeadNode
 
-After the installation of the HPC Pack software, we need to configure the HeadNode. The HPC pack provides us with a PowerShell module we can use to complete the configuration. After activating the snap-in, we need we can get the network interface we need. In this case, we have two, because we will create two in the `CloudFormation` file, the same way as we did in the SQL Server deployment. We will select the first one and set the `HpcNetwork` on `Enterprise` using this network interface.
+After the installation of the HPC Pack software, we need to configure the HeadNode. The HPC pack provides us with a PowerShell module we can use to complete the configuration. After activating the snap-in, we need we can get the network interface we need. In this case, we have two, because we will create two in the CloudFormation file, the same way as we did in the SQL Server deployment. We will select the first one and set the `HpcNetwork` on `Enterprise` using this network interface.
 
 >Enterprise network: An organizational network connected to the HeadNode and, in some cases, to other nodes in the cluster. The enterprise network is often the public or organization network that most users log on to perform their >work. All intra-cluster management and deployment traffic is carried on the enterprise network unless a private network and an optional application network also connect the cluster nodes.
 
@@ -358,9 +358,9 @@ Set-HpcNodeState -Name $env:COMPUTERNAME -State online
 
 So we are almost done with setting up the HeadNode. There is only one thing we need to do, and that is, make the certificate available for the ComputeNodes. Because we are using a self-signed certificate, the ComputeNodes need to install the same certificate so we can use a trusted HTTPS connection between the nodes. This leaves us with a problem, because we are installing the HeadNode and the certificate is in a folder on our C-Drive. The solution is not that complicated; during the installation of the HPC Software a share is created, which can be used by the ComputeNodes during setup. So we copy the certificate we used to this shared folder (`C:\Program Files\Microsoft HPC Pack 2016\Data\InstallShare\Certificates\`). 
 
-### Setting up `CloudFormation` template yaml 
+### Setting up CloudFormation template yaml 
 
-The HeadNode `CloudFormation` files are almost the same as the once we used to deploy the SQL Server instance. We used Packer to create a new AMI based on the standard Windows Server version provided by Microsoft. We added `Chocolately` and the `AWS CLI`. For running the HeadNode we created an Auto Scaling Group with a launch template and provided the HeadNode with a DNS name called `HeadNode.mydomain.com`. The only thing different in the `LaunchTemplate` is, of course, the user-data. 
+The HeadNode CloudFormation files are almost the same as the once we used to deploy the SQL Server instance. We used Packer to create a new AMI based on the standard Windows Server version provided by Microsoft. We added `Chocolately` and the `AWS CLI`. For running the HeadNode we created an Auto Scaling Group with a launch template and provided the HeadNode with a DNS name called `HeadNode.mydomain.com`. The only thing different in the `LaunchTemplate` is, of course, the user-data. 
 
 First, we install the certificate by calling the little modified PowerShell script provided by Microsoft. Next, we will install the HPC Pack using credentials from the parameter store, and the last step is we copy the certificate we use to install the HeadNode to the share created by the installer.
 
@@ -469,11 +469,11 @@ $node = Get-HpcNode -HealthState OK -State Offline -Name $env:COMPUTERNAME
 Set-HpcNodeState -Name $env:COMPUTERNAME -State Online -ErrorAction Stop
 ```
 
-### Setting up `CloudFormation` template yaml
+### Setting up CloudFormation template yaml
 
 Just like the SQL Server and the HeadNode we will also use an `AutoScalingGroup` from running the ComputeNodes. Because you probably want more then one ComputeNode we will not assign IP addresses or DNS entries, simply because we do not really care about this configuration on the ComputeNodes and because we do not need them.  
 
-We again just just change the `UserData` option in the `CloudFormation` file. In the `UserData` part, we need to put getting the credentials we need from the `AWS Parameter Store` and make sure we use the copy certificate script before installing the HPC Pack. We separated the installation and the configuration from the ComputeNode into two scripts. Only for the configuration, we need the `PSSessionConfiguration`, for the installation, we can just pass tru the credentials using the `Invoke-Command` method.
+We again just just change the `UserData` option in the CloudFormation file. In the `UserData` part, we need to put getting the credentials we need from the `AWS Parameter Store` and make sure we use the copy certificate script before installing the HPC Pack. We separated the installation and the configuration from the ComputeNode into two scripts. Only for the configuration, we need the `PSSessionConfiguration`, for the installation, we can just pass tru the credentials using the `Invoke-Command` method.
 
 ```yaml
 UserData:
@@ -500,13 +500,13 @@ UserData:
 
 # Dependencies
 
-The tricky part of installing this HPC Pack is the dependency between all the different components. You can indicate dependencies between the different resources, but there is a small problem here because when the EC2 instances is started the `CloudFormation` resource is done, but we are not done with the software installation yet. To resolve this problem, you can use the `cfn-signal.exe` functionality to indicate the installation is completed. You can use this to send a signal when the software installation is done. What you need to do is change the `CloudFormation` template and put all the scripts in the `Metadata` option
+The tricky part of installing this HPC Pack is the dependency between all the different components. You can indicate dependencies between the different resources, but there is a small problem here because when the EC2 instances is started the CloudFormation resource is done, but we are not done with the software installation yet. To resolve this problem, you can use the `cfn-signal.exe` functionality to indicate the installation is completed. You can use this to send a signal when the software installation is done. What you need to do is change the CloudFormation template and put all the scripts in the `Metadata` option
 
-Within the `MetaData` you need to configure `configsets` which need to contain the script you want to run. You can use multiple commands that need to run after each other. The last step is sending the signal when done. In the resource that depends on this resource, add the `WaitOnResourceSignals: true` in the `UpdatePolicy` section in the `CloudFormation` file.
+Within the `MetaData` you need to configure `configsets` which need to contain the script you want to run. You can use multiple commands that need to run after each other. The last step is sending the signal when done. In the resource that depends on this resource, add the `WaitOnResourceSignals: true` in the `UpdatePolicy` section in the CloudFormation file.
 
 ```yaml
 Metadata:
-  AWS::`CloudFormation`::Init:
+  AWS::CloudFormation::Init:
     configSets:
       ascending:
         - setup

@@ -61,12 +61,13 @@
 						</ul>
 					</div>
 					<div class="card">
-						<span>[
+						<h3>Tags</h3>
+						  <ul>
 							{% for tag in page.tags %}
-							  {% capture tag_name %}{{ tag }}{% endcapture %}
-							  <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
-							{% endfor %}
-						  ]</span>
+							{% capture tag_name %}{{ tag }}{% endcapture %}
+							 <li><a href="/tag/{{ tag_name }}">{{ tag_name }}</a></li> 
+						  {% endfor %}
+						  </ul>	  
 					</div>  
 					<div class="card follow">
 						<ul>

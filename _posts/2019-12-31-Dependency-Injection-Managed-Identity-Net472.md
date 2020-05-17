@@ -4,6 +4,7 @@ title: "Using Dependency Injection, Managed Identity and Key vault in a.NET 4.7.
 date: 2019-12-31
 summary: "This blog is about adding the Microsoft Dependency Injection extension and Azure Key vault to a .NET 4.7.2 application. "
 minute: 10
+tags: [azure, dotnet]
 ---
 
 A while ago, Mircosoft introduced an extension for using Dependency Injection in .NET. By adding this extension to your application, you do not need a 3<sup>rd</sup> party package. This works perfectly for the .NET Core version and you can add the NuGet package to your solution. But what if you want to use is in a .NET Framework application? You can add the package to your solution using Nuget, but out of the box, you can not use it. 

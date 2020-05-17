@@ -1,5 +1,6 @@
 ---
 layout: taglayout
-title: "Tag: Azure"
+title: "Azure"
 tag: azure
+tags: [aws, azure, devops, powershell, cloudformation, dotnet]
 ---

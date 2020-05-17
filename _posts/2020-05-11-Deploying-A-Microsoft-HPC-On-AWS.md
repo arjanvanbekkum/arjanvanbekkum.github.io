@@ -4,6 +4,7 @@ title: "Deploying a Microsoft High Performance Cluster on AWS using Infrastructu
 date: 2020-05-16
 summary: "When running a HPC on AWS you want to use CloudFormation templates to create any instance needed to run the HPC cluster. HPC needs a SQL Server, Headnode(s) and ComputeNodes, we will create template and script for all the components needed to run an High Performance Cluster on Amazon Web Services"
 minute: 30
+tags: [aws, powershell, cloudformation]
 ---
 
 >Microsoft HPC Pack brings the power of high-performance computing (HPC) to the commercial mainstream. 

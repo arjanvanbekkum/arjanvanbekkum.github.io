@@ -1,6 +1,6 @@
 ---
 layout: taglayout
-title: "Amazon Web Services"
-tag: aws
+title: " DevOps"
+tag: devops
 tags: [aws, azure, devops, powershell, cloudformation, dotnet]
 ---

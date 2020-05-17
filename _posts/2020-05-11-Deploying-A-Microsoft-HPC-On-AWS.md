@@ -405,7 +405,7 @@ $password = $password | ConvertTo-SecureString -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential($username,$password)
 
 New-PSDrive -Name "InstallDir" -PSProvider "FileSystem" -Root "\\HeadNode.mydomain.com\REMINST" -Credential $credential
-Copy-Item InstallDir:\certificates\*.* -Destination "C:\ProgramData\QRM"
+Copy-Item InstallDir:\certificates\*.* -Destination "C:\ProgramData\installdata"
 ```
 
 ### Installing the HPC Pack on the ComputeNode.
@@ -413,15 +413,15 @@ Copy-Item InstallDir:\certificates\*.* -Destination "C:\ProgramData\QRM"
 To install the software on the ComputeNode you can use the same installer as we used on the HeadNode. The difference is that we need to tell the installer is needs to install the ComputeNode. But before we can install the software, we first need to make sure we can communicate with the HeadNode using HTTPS. We first need to install the `.cer` file from the HeadNode to make sure the HeadNode and the ComputeNode trust each other. We need to add this certificate to the `Root` of the local machine.
 
 ```powershell
-$cerFileName = "C:\ProgramData\QRM\HpcHnPublicCert.cer"
+$cerFileName = "C:\ProgramData\installdata\HpcHnPublicCert.cer"
 Import-Certificate -FilePath $cerFileName -CertStoreLocation Cert:\LocalMachine\Root  
 ``` 
 
 When we created the certificate, we used a password from the `AWS Parameter Store` to export it from the certificate store on the HeadNode. We now need the same password to install the software on the ComputeNode. We also need to tell the ComputeNode what the HeadNode is its needs to connect to. So we change the command line arguments a bit and then call the `Start-Process` again.
 
 ```powershell
-$tgtdir = "C:\ProgramData\QRM\HPC\2016\"
-$certpath = "C:\ProgramData\QRM\HPCCertificate.pfx"
+$tgtdir = "C:\ProgramData\installdata\HPC\2016\"
+$certpath = "C:\ProgramData\installdata\HPCCertificate.pfx"
 $certificate_password = aws ssm get-parameter --name "/certificate/hpc/password" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
 
 $dnsname = aws ssm get-parameter --name " /Vpc/Default/PrivateDns/Name" --query "Parameter.Value" --output text --region eu-central-1
@@ -450,7 +450,7 @@ To configure the ComputeNode correctly, we need tell PowerShell it is allowed to
 
 ```powershell
 Register-PSSessionConfiguration -Name InstallHPC -RunAsCredential $credential -Force 
-Invoke-Command -ComputerName . -Credential $credential -File C:\\programdata\\QRM\\configure_hpc_ComputeNode.ps1 -ConfigurationName InstallHPC
+Invoke-Command -ComputerName . -Credential $credential -File C:\\programdata\\installdata\\configure_hpc_ComputeNode.ps1 -ConfigurationName InstallHPC
 ```
 
 ### Configure the ComputeNode
@@ -480,18 +480,18 @@ UserData:
   Fn::Base64: 
     Fn::Sub: |
       <powershell>
-        $ServiceusernameAccount = aws ssm get-parameter --name "/qrm/service-account/username" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
-        $password = aws ssm get-parameter --name "/qrm/service-account/password" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
+        $ServiceusernameAccount = aws ssm get-parameter --name "/service-account/username" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
+        $password = aws ssm get-parameter --name "/service-account/password" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
         $password = $password | ConvertTo-SecureString -AsPlainText -Force
         $credential = New-Object System.Management.Automation.PSCredential($username,$password)
 
         New-PSDrive -Name "InstallDir" -PSProvider "FileSystem" -Root "\\HeadNode.${PrivateHostedZoneName}\REMINST" -Credential $credential
-        Copy-Item InstallDir:\certificates\*.* -Destination "C:\ProgramData\QRM"
+        Copy-Item InstallDir:\certificates\*.* -Destination "C:\ProgramData\installdata"
 
-        Invoke-Command -ComputerName . -Credential $credential -File C:\\programdata\\QRM\\install_hpc_ComputeNode.ps1 
+        Invoke-Command -ComputerName . -Credential $credential -File C:\\programdata\\installdata\\install_hpc_ComputeNode.ps1 
 
         Register-PSSessionConfiguration -Name InstallHPC -RunAsCredential $credential -Force 
-        Invoke-Command -ComputerName . -Credential $credential -File C:\\programdata\\QRM\\configure_hpc_ComputeNode.ps1 -ConfigurationName InstallHPC
+        Invoke-Command -ComputerName . -Credential $credential -File C:\\programdata\\installdata\\configure_hpc_ComputeNode.ps1 -ConfigurationName InstallHPC
 
         Remove-PSDrive -Name InstallDir
       </powershell>
@@ -517,14 +517,14 @@ Metadata:
           content: !Sub |
             New-PSDrive -Name "InstallDir" -PSProvider "FileSystem" 
                 -Root "\\HeadNode.${PrivateHostedZoneName}\REMINST" -Credential $credential
-            Copy-Item InstallDir:\certificates\*.* -Destination "C:\ProgramData\QRM"
+            Copy-Item InstallDir:\certificates\*.* -Destination "C:\ProgramData\installdata"
     install_hpc:
       commands:
         00-add-adminuser:
           command: powershell.exe -ExecutionPolicy Unrestricted Add-LocalGroupMember 
             -Group "Administrators" -Member "awsad\$env:computername$"
         01-install-hpc:
-          command: powershell.exe -ExecutionPolicy Unrestricted C:\programdata\qrm\install_hpc.ps1
+          command: powershell.exe -ExecutionPolicy Unrestricted C:\programdata\installdata\install_hpc.ps1
         02-signal-completion:
           command: !Sub >
             cfn-signal.exe -e %ERRORLEVEL% --resource ComputeNodeWindowsAutoScalingGroup

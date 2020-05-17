@@ -34,16 +34,14 @@ Next, we need to determine what volumes are connected to this machine. To make s
 
 ```powershell
 # get the volume of the tag which is connected to the volumes
-$valuetag = Get-EC2Tag -Filter @{Name="resource-id";Value=$instance} | 
-  Where-Object {$_.Key -eq "ec2-volume-manager-attachment"  } | Select-Object -expand Value
+$valuetag = Get-EC2Tag -Filter @{Name="resource-id";Value=$instance} | Where-Object {$_.Key -eq "ec2-volume-manager-attachment"  } | Select-Object -expand Value
 ```
 
 On the volumes, we added the same tag; we use the value of this tag on the instance to get all the volumes in AWS with the same tag name and value. Now we know the number of volumes that should be connected to the instance before we start creating disks.
 
 ```powershell
 # get the expected volume with the same tag / value pair
-$expectedvolume = ((Get-EC2Volume).Tags | Where-Object { ($_.key -eq "ec2-volume-manager-attachment") 
-  -and ($_.value -eq $valuetag) }).Count
+$expectedvolume = ((Get-EC2Volume).Tags | Where-Object { ($_.key -eq "ec2-volume-manager-attachment") -and ($_.value -eq $valuetag) }).Count
 ```
 ## Get the connected disks
 
@@ -53,8 +51,7 @@ Using the `get-ec2volume` and filter the on the `InstanceId` we found by calling
 
 ```powershell
 # get the number of volumes connected to the instance
-$disks = ((get-ec2volume) | Where-Object { ($_.Attachments.InstanceId -eq $instance) }).Tags | 
-  Where-Object { ($_.key -eq "ec2-volume-manager-attachment") -and ($_.value -eq $valuetag) }
+$disks = ((get-ec2volume) | Where-Object { ($_.Attachments.InstanceId -eq $instance) }).Tags | Where-Object { ($_.key -eq "ec2-volume-manager-attachment") -and ($_.value -eq $valuetag) }
 ```
 
 Now we have the expected number of volumes and the number of connected volumes, if the numbers do not match we need to wait for a while until all the volumes are connected.  
@@ -63,8 +60,7 @@ Now we have the expected number of volumes and the number of connected volumes, 
 # if the numbers do not match, we are waiting for the volume to be attached to the instance
 while ($disks.Count -ne $expectedvolume)
 {
-  $disks = ((get-ec2volume) | Where-Object { ($_.Attachments.InstanceId -eq $instance) }).Tags | 
-    Where-Object { ($_.key -eq "ec2-volume-manager-attachment") -and ($_.value -eq $valuetag) }
+  $disks = ((get-ec2volume) | Where-Object { ($_.Attachments.InstanceId -eq $instance) }).Tags | Where-Object { ($_.key -eq "ec2-volume-manager-attachment") -and ($_.value -eq $valuetag) }
   Start-Sleep -s 5
   Write-Host "waiting for volumes..."
 }
@@ -150,8 +146,7 @@ The last step is to set the system label by calling the `set-volume` method and 
     if ($disk.OperationalStatus -eq "Offline")
     {
         Set-Disk -Number $disk.Number -IsOffline $False
-        $currentDrive = get-partition -DiskNumber $disk.Number| Where-Object { $_.Type -ne "Reserved" } 
-          | Select-Object -Expand DriveLetter
+        $currentDrive = get-partition -DiskNumber $disk.Number| Where-Object { $_.Type -ne "Reserved" }  | Select-Object -Expand DriveLetter
         if ( ($currentDrive -ne $DriveLetter) -and ($DriveLetter) -and ($currentDrive) )
         {
             Get-Partition -DriveLetter $currentDrive | Set-Partition -NewDriveLetter $DriveLetter

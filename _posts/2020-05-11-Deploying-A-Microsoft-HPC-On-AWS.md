@@ -41,8 +41,7 @@ Before you can create a database in a folder on a drive, you need to make sure t
 $path = "D:\SQL"
 New-Item -ItemType Directory -Force -Path $path
 $Acl = (Get-Item $path).GetAccessControl('Access')
-$Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("NT SERVICE\MSSQLSERVER", 
-    "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+$Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("NT SERVICE\MSSQLSERVER", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
 $Acl.SetAccessRule($Ar)
 Set-Acl $path $Acl
 ```
@@ -98,8 +97,7 @@ EXECUTE (@SQL_CREATE_DB)
 So now that we have a SQL script to create the databases, we a PowerShell to run this script. To connect to our SQL server, we will use SQL server authentication. The default authentication in SQL Server is Windows authentication, so we need to change this. We can do this within SQL Server, but we need to restart the SQL server services to activate it. We created a script containing the one line below and saved as `update_sql_mixed_mode.sql`. 
 
 ```sql
-EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', 
-    N'LoginMode', REG_DWORD, 2 
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2 
 ```
 
 The last step for the SQL server is to connect all the pieces and create a PowerShell we can use to run in the `UserData` option in the CloudFormation template. This PowerShell will run our SQL script on the SQL server itself, so we can simply use `localhost` to connect.  
@@ -122,19 +120,15 @@ net start sqlserveragent
 
 Invoke-Sqlcmd -ServerInstance $ServerInstance -InputFile "C:\programdata\installdata\SQL\CreateHpcDatabase.sql" 
 
-$password = aws ssm get-parameter --name "/sql-server/service-account/password" 
-    --query "Parameter.Value" --with-decryption --output text --region eu-central-1
-$HpcUser = aws ssm get-parameter --name "/sql-server/service-account/username" 
-    --query "Parameter.Value" --with-decryption --output text --region eu-central-1
+$password = aws ssm get-parameter --name "/sql-server/service-account/password" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
+$HpcUser = aws ssm get-parameter --name "/sql-server/service-account/username" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
 
 $ParameterArray = "TargetAccount=$HpcUser", "PassWord=$password"
 $hpcDBs = @('HPCDiagnostics', 'HPCManagement', 'HPCMonitoring', 'HPCReporting', 'HPCScheduler')
 foreach($hpcdb in $hpcDBs)
 {
-    Invoke-Sqlcmd -ServerInstance $ServerInstance -Database $hpcdb 
-        -InputFile "C:\programdata\installdata\SQL\AddDbUserForHpcSetupUser.sql" -Variable  $ParameterArray 
-    Invoke-Sqlcmd -ServerInstance $ServerInstance -Database $hpcdb 
-        -InputFile "C:\programdata\installdata\SQL\AddDbUserForHpcService.sql" -Variable  $ParameterArray 
+    Invoke-Sqlcmd -ServerInstance $ServerInstance -Database $hpcdb -InputFile "C:\programdata\installdata\SQL\AddDbUserForHpcSetupUser.sql" -Variable  $ParameterArray 
+    Invoke-Sqlcmd -ServerInstance $ServerInstance -Database $hpcdb -InputFile "C:\programdata\installdata\SQL\AddDbUserForHpcService.sql" -Variable  $ParameterArray 
 }
 ```
 
@@ -190,9 +184,9 @@ First, you need to create a `NetworkInterface,` you can use the `network-interfa
         - ${IpAddress}
         - IpAddress: !Join
             - .
-            -   - !Select [0, !Split [., !Select [0, !Ref SubnetsCidr]]]
-                - !Select [1, !Split [., !Select [0, !Ref SubnetsCidr]]]
-                - !Select [2, !Split [., !Select [0, !Ref SubnetsCidr]]]
+            -   - !Select [0, !Split [., !Select [0, !Ref Subnets]]]
+                - !Select [1, !Split [., !Select [0, !Ref Subnets]]]
+                - !Select [2, !Split [., !Select [0, !Ref Subnets]]]
                 - '5'
       Tags:
         - Key: Name
@@ -269,12 +263,9 @@ So if this service isn't installed, we can install the HPC Pack on the HeadNode.
 We need both the information about the certificate as well as the SQL Server and the SQL-User for connecting to the database. We will get them from the `AWS Parameter Store` and store them in variables we later on need. 
 
 ```powershell
-$certificate_password = aws ssm get-parameter --name "/certificate/hpc/password" --query "Parameter.Value" --with-decryption 
-    --output text --region eu-central-1
-$sql_password = aws ssm get-parameter --name "/sql-server/service-account/password" --query "Parameter.Value" --with-decryption 
-    --output text --region eu-central-1
-$sql_user = aws ssm get-parameter --name "/sql-server/service-account/username" --query "Parameter.Value" --with-decryption 
-    --output text --region eu-central-1
+$certificate_password = aws ssm get-parameter --name "/certificate/hpc/password" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
+$sql_password = aws ssm get-parameter --name "/sql-server/service-account/password" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
+$sql_user = aws ssm get-parameter --name "/sql-server/service-account/username" --query "Parameter.Value" --with-decryption --output text --region eu-central-1
 
 $tgtdir = "C:\ProgramData\installdata\HPC\2016\"
 $certpath = "C:\ProgramData\installdata\HPCCertificate.pfx"
@@ -298,8 +289,7 @@ $schdConstr = "Data Source=$SQLServerInstance;Initial Catalog=HpcScheduler;$seci
 $monConstr  = "Data Source=$SQLServerInstance;Initial Catalog=HPCMonitoring;$secinfo"
 $rptConstr  = "Data Source=$SQLServerInstance;Initial Catalog=HPCReporting;$secinfo"
 $diagConstr = "Data Source=$SQLServerInstance;Initial Catalog=HPCDiagnostics;$secinfo"
-$setupArg = "$setupArg -MGMTDBCONSTR:`"$mgmtConstr`" -SCHDDBCONSTR:`"$schdConstr`" -RPTDBCONSTR:`"$rptConstr`" 
-    -DIAGDBCONSTR:`"$diagConstr`" -MONDBCONSTR:`"$monConstr`""           
+$setupArg = "$setupArg -MGMTDBCONSTR:`"$mgmtConstr`" -SCHDDBCONSTR:`"$schdConstr`" -RPTDBCONSTR:`"$rptConstr`" -DIAGDBCONSTR:`"$diagConstr`" -MONDBCONSTR:`"$monConstr`""           
 ```
 
 The last thing we need to do is installing the HPC software on the EC2 instance by calling the installer and passing the `setupArg` as the argument list. We will wait until the process finishes using the `-Wait` option from the `Start-Process` command in PowerShell. Installing the HeadNode software may take a while. It also might fail, you can take a look at the log files in the `Windows\Temp` folder, this is where the HPC Pack creates a new folder every time the installer is started. So make sure you are able to logon to the server or can connect using remote PowerShell, the AWS Console offers options to connect using a command-line interface. 

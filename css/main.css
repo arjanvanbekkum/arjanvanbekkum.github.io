@@ -260,6 +260,7 @@ nav ul  {
     word-break: break-all;
     word-wrap: break-word;
     border: none;
+    overflow: auto;
 }
   
   code {

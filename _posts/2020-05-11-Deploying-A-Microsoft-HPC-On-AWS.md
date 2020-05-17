@@ -6,9 +6,9 @@ summary: "When running a HPC on AWS you want to use CloudFormation templates to 
 minute: 30
 ---
 
->"Microsoft HPC Pack brings the power of high-performance computing (HPC) to the commercial mainstream. 
+>Microsoft HPC Pack brings the power of high-performance computing (HPC) to the commercial mainstream. 
 >The centralized management and deployment interface helps to simplify deployment for both large and small compute
->clusters and provide a simple and effective management experience to increase cluster administrator productivity."
+>clusters and provide a simple and effective management experience to increase cluster administrator productivity.
 
 You can find more information about HPC on the <a href ="https://docs.microsoft.com/en-us/powershell/high-performance-computing/overview-of-microsoft-hpc-pack?view=hpc16-ps">Microsoft Site <a> 
 
@@ -221,10 +221,10 @@ So that it for creating the SQL Server, now let's move to the HeadNode.
 
 # HeadNode
 
->"HPC Pack includes a highly scalable job scheduler that provides support for interactive Service-Oriented Architecture (SOA) 
+>HPC Pack includes a highly scalable job scheduler that provides support for interactive Service-Oriented Architecture (SOA) 
 >applications using High Performance Computing for Windows Communication Foundation (HPC for WCF) and parallel jobs using the 
 >Microsoft Message Passing Interface (MS-MPI). Essential applications from key independent software providers (ISVs) can be run 
->on the cluster to help you meet your business needs in a timely, cost-effective, and highly productive manner."
+>on the cluster to help you meet your business needs in a timely, cost-effective, and highly productive manner.
  
 
 The HeadNode makes sure jobs for the HPC are distributed correctly over the ComputeNodes. It holds the network topology and node templates you can assign to the ComputeNodes. You can find more information about the complete HPC pack on the Microsoft site, use the link at the top of this blog. 

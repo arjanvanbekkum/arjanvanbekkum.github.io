@@ -4,7 +4,7 @@ title: "Using Azure DevOps Server to deploy Oracle Objects"
 date: 2019-07-18
 summary: "How to deploy your Oracle objects using just powershell and Azure DevOps. By using the Oracle client you will be able to deploy objects and scripts without having to install an extension from the marketplace"
 minute: 6
-tags: [azure, azuredevOps, powershell]
+tags: [azure, devops, powershell]
 ---
 CI/CD is the only way to deploy and release changes to production. But what if you are not using SQL Server but Oracle instead, are you able to use Azure DevOps? Of course, you are!
 

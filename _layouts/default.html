@@ -7,6 +7,10 @@
 			<link rel="stylesheet" type="text/css" href="/css/main.css">
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 		
+			{% if site.tags != "" %}
+				{% include .collecttags.html %}
+		  	{% endif %}
+
 			{% seo %}
 			
 			<!-- google analytics -->
@@ -55,7 +59,15 @@
               				<li><a href="https://marcbruins.nl/" alt="Marc Bruins" target="_blank">Marc Bruins</a></li>
 							<li><a href="https://nielsnijveldt.github.io/"alt="Niels Nijveldt" target="_blank">Niels Nijveldt</a></li>
 						</ul>
-				  	</div>
+					</div>
+					<div class="card">
+						<span>[
+							{% for tag in page.tags %}
+							  {% capture tag_name %}{{ tag }}{% endcapture %}
+							  <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
+							{% endfor %}
+						  ]</span>
+					</div>  
 					<div class="card follow">
 						<ul>
 								<li><a href="https://www.linkedin.com/in/arjanvanbekkum/" alt="linkedIn" target="_blank"><i class="fab fa-linkedin" style="font-size: 3em"></i></a></li>

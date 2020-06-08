@@ -2,5 +2,5 @@
 layout: taglayout
 title: " DevOps"
 tag: devops
-tags: [aws, azure, devops, powershell, cloudformation, dotnet]
+tags: [aws, azure, devops, powershell, cloudformation, dotnet, docker, kubernetes]
 ---

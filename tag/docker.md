@@ -1,6 +1,6 @@
 ---
 layout: taglayout
-title: ".NET"
-tag: dotnet
+title: "Docker"
+tag: docker
 tags: [aws, azure, devops, powershell, cloudformation, dotnet, docker, kubernetes]
 ---

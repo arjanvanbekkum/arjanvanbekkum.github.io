@@ -44,11 +44,11 @@ At first it seems to have nothing to do with our problem but at the bottom is a 
 
 This seems like a strange thing because we already checked if we needed to update the packages. According to the NuGet package manager there were no updates available. So we check our solution again, but no updates needed. 
 
-<img src="/images/noupdatesnugetmanager.jpg" alt="no updates available" width="200"/>
+<img src="/images/noupdatesnugetmanager.jpg" alt="no updates available" height="200"/>
 
 EF core runs on the latest version available, but when you collapse the packages to see the sub-packages you see it uses an old version 1.0.19 of the `Microsoft.Data.SqlClient`. 
 
-<img src="/images/hiddendatasqlclient.jpg" alt="hidden package" width="200"/>
+<img src="/images/hiddendatasqlclient.jpg" alt="hidden package" height="200"/>
 
 We used the NuGet package manager to find the latest version (1.1.3) of the `Microsoft.Data.SqlClient` and installed the update. We deployed the new version and now it is running just fine.
 

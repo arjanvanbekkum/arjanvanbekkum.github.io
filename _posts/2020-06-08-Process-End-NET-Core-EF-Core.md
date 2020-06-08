@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Unexpected process end and database lock with.NET Core WebApi and Entity Framework Core."
+title: "Unexpected process end and database lock with .NET Core WebApi and Entity Framework Core."
 date: 2020-06-08
 summary: "Developing a WebApi with Async database communication within containers can show unexpected process ending and lock when not with Entity Framework Core 3.1 and .NET Core 3.1"
 minute: 5

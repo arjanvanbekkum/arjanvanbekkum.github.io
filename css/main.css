@@ -265,7 +265,8 @@ nav ul  {
   
   code {
     font-family:'Bitstream Vera Sans Mono','Courier', monospace;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: bold;
   }
 
 .lineno { padding-right: 24px; color: lighten(#333332,50);}

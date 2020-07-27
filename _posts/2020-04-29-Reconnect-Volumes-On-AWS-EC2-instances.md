@@ -24,7 +24,7 @@ For restoring the disks in the correct order, we would like to create a generic 
 The first step is we need to know what the instance is we are running the script on. We used Packer to create a base image; on this image, we installed chocolaty and used this to install the AWS command-line interface so we can use the AWS tooling. To get the instance information, AWS provides endpoints you can call to get the information you need. 
 
 ```powershell
- get the ID of the instance
+# get the ID of the instance
 $instance = Invoke-WebRequest -Uri http://169.254.169.254/latest/meta-data/instance-id -UseBasicParsing
 ```
 

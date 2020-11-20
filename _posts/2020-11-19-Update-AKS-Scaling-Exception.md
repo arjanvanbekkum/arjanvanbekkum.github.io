@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Updating Azure Kubernetes Cluster failed because of a scaling exception."
+title: "Updating Azure Kubernetes Cluster failed with a scaling exception."
 date: 2020-11-19
 summary: "When updating an Azure Kubernetes Cluster, the update failed because of a ScaleVMASAgentPoolFailed exception."
 minute: 5

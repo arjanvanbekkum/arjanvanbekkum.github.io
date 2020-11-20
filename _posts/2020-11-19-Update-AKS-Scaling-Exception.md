@@ -2,7 +2,7 @@
 layout: post
 title: "Updating Azure Kubernetes Cluster failed with a scaling exception."
 date: 2020-11-19
-summary: "When updating an Azure Kubernetes Cluster, the update failed because of a ScaleVMASAgentPoolFailed exception."
+summary: "Updating an Azure Kubernetes Cluster failed, with a ScaleVMASAgentPoolFailed exception. Read on what happened and how you can easily fix this issue.p"
 minute: 5
 tags: [azure, kubernetes]
 ---

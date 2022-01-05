@@ -16,7 +16,7 @@ When using NLog, you need to configure a `Target`; that target needs to be wrapp
 Let's take a quick look at the `FileTarget` configuration, here we set the `Layout`, the `FileName`, and some other properties to create the files. The `SimpleLayout` we set here is just the `message` we send in when logging. 
 
 ```csharp
-var wrappedTarget = new FileTarget("BQConfigConfigured.QLog.FileTarget")
+var wrappedTarget = new FileTarget("FileTarget")
 {
     Layout = new SimpleLayout("${message}"),
     FileName = Path.Combine("C:\MyFolder", "InstallationFolder", "logfile.txt"),
@@ -27,7 +27,7 @@ var wrappedTarget = new FileTarget("BQConfigConfigured.QLog.FileTarget")
 Next, we need to set the `TargetWrapper`; this wrapper the `FileTarget` and makes it async. NLog will use a different thread to write to files and not the logging thread. The `AsyncTargetWrapperOverflowAction` is set to `Block` to prevent buffer overflow when writing log files. The other options might cause memory issues, so be careful there. 
 
 ```csharp
-var target = new AsyncTargetWrapper("BQConfigConfigured.QLog.FileTargetAsync", wrappedTarget)
+var target = new AsyncTargetWrapper("FileTargetAsync", wrappedTarget)
 {
     OverflowAction = AsyncTargetWrapperOverflowAction.Block
 };
@@ -36,12 +36,12 @@ var target = new AsyncTargetWrapper("BQConfigConfigured.QLog.FileTargetAsync", w
 The last step is to add the `AsyncTargetWrapper` to a `LoggingRule`. We can set the `LogLevel` and the `Pattern`.
 
 ```csharp
-var loggingRule = new LoggingRule("BQConfigConfigured.QLog.FileLogger")
+var loggingRule = new LoggingRule("FileLogger")
 {
     LoggerNamePattern = "*",
     Targets =
     {
-        loggingConfiguration.FindTargetByName("BQConfigConfigured.QLog.FileTargetAsync")
+        loggingConfiguration.FindTargetByName("FileTargetAsync")
     }
 };
 loggingRule.EnableLoggingForLevels(NLog.LogLevel.Trace, NLog.LogLevel.Fatal);
@@ -60,7 +60,7 @@ When you install the package, you can easily add a new target. You can almost re
 var elasticSearchTarget = new ElasticSearchTarget()
 {
     Layout = new SimpleLayout("${message}"),
-    Name = "BQConfigConfigured.QLog.ElasticTarget",
+    Name = "ElasticTarget",
     Uri = "https://your_elastic_search_url",
     Index = new SimpleLayout("MyIndex"),
 }
@@ -71,7 +71,7 @@ You will probably need something to authenticate when sending the logging to Ela
 Next, we need to wrap this `ElasticSearchTarget`into an `AsyncTargetWrapper`. 
 
 ```csharp
-var target = new AsyncTargetWrapper("BQConfigConfigured.QLog.ElasticTargetAsync", elasticSearchTarget)
+var target = new AsyncTargetWrapper("ElasticTargetAsync", elasticSearchTarget)
 {
     OverflowAction = AsyncTargetWrapperOverflowAction.Block,
 };
@@ -80,13 +80,13 @@ var target = new AsyncTargetWrapper("BQConfigConfigured.QLog.ElasticTargetAsync"
 And the last step is again to add this wrapper to a logging rule. You do not have to add two different LogRules. You can connect both `AsyncTargetWrappers` into the same `loggingRule` just like we do here. 
 
 ```csharp
-var loggingRuleElastic = new LoggingRule("BQConfigConfigured.QLog.Logger")
+var loggingRuleElastic = new LoggingRule("Logger")
 {
     LoggerNamePattern = "*",
     Targets =
         {
-            loggingConfiguration.FindTargetByName("BQConfigConfigured.QLog.ElasticTargetAsync"),
-            loggingConfiguration.FindTargetByName("BQConfigConfigured.QLog.FileTargetAsync")
+            loggingConfiguration.FindTargetByName("ElasticTargetAsync"),
+            loggingConfiguration.FindTargetByName("FileTargetAsync")
         }
 };
 loggingRuleElastic.EnableLoggingForLevels(NLog.LogLevel.Debug, NLog.LogLevel.Fatal);

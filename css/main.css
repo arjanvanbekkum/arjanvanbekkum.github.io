@@ -171,7 +171,7 @@ nav ul  {
     background-repeat: no-repeat;
     background-position: center;
     /* Add the blur effect */
-    filter: blur(8px);
+    filter: blur(4px);
     -webkit-filter: blur(8px);
 
   }

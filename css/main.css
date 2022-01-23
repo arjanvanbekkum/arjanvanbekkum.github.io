@@ -170,10 +170,18 @@ nav ul  {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-
-
   }
 
+
+  .header {
+    position: relative;
+}
+
+.header span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
 
   /* Position text in the middle of the page/image */
 .bg-text {

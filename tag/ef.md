@@ -2,5 +2,5 @@
 layout: taglayout
 title: "Entity Framework"
 tag: aws
-tags: [ef, dotnet]
+tags: [aws, azure, devops, powershell, cloudformation, dotnet, docker, kubernetes, github, ef]
 ---

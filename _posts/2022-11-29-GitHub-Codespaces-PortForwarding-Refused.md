@@ -7,9 +7,9 @@ minute: 5
 tags: [dotnet, github]
 ---
 
-GitHub recently announced that Codespaces is available for everyone. If you need to know what Codespaces is, check it [out here](https://github.com/features/codespaces). It is Visual Studio Code running on a VM in Azure available from your web browser.
+GitHub recently announced that Codespaces is available for everyone. If you need to know what Codespaces is, check it [out here](https://github.com/features/codespaces). Basically, it is Visual Studio Code running on a VM in Azure available from your web browser.
 
-I wanted to play around with Codespaces, so I created a new .NET web API project. As I have always been a Visual Studio user for .NET development, using Codespaces for .NET was a unique experience. 
+I wanted to play around with Codespaces, so I created a new .NET web API project. As I have always been a Visual Studio user for .NET development, using Codespaces for .NET was a new experience. 
 
 ## .NET webapi project
 Let's first create a new .NET project. To do this, you can run the following command
@@ -25,19 +25,18 @@ You can run this project by executing the following command.
 ```
 This will start the project in Codespaces, and you can use a browser on your local machine to access the web API. The idea is that you can use it just like you do on your local development machine.
 
-Code Spaces creates port forwarding to your local machine so you can interact with the web API.
 
 ## Port Forwarding Issue
-When you run your project, you will see a pop-up in your code spaces telling you you can browse your website on the HTTP port. But if you click the `Open in browser button in the popup, you will not be able to open the site.
+When you run your project, you will see a pop-up in your code spaces telling you you can browse your website on the HTTP port. Codespaces creates port forwarding to your local machine so you can interact with the web API. But if you click the `Open in browser button in the popup, you will not be able to open the site.
 
-The issue here is that the default .NET web API project does port forward to HTTPS. So you will be redirected to the HTTPS port, which is not supported within Code Spaces. 
+The issue here is that the default .NET web API project does port forward to the HTTPS. So you will be redirected to the localhost HTTPS port, which is not supported within Codespaces. 
 
 The easiest way to fix it is to remove the following line. 
 
 ```csharp
  app.UseHttpsRedirection();
 ```
-This will stop the default HTTPS forwarding, and you will be able the use the HTTP port again. There might be a better solution than this one that is most secure when running this web API in a production environment. 
+This will stop the default HTTPS forwarding, and you will be able the use the HTTP port again. There might be a better solution than this one. Removing this line is not that secure when running this web API in a production environment. 
 
 So, what if we do not want to remove the line? What other options do we have? When you use the `dotnet run` command to start your project, the terminal will show something like this.
 ```

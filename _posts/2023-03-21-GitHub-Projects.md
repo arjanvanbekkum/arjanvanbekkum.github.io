@@ -57,7 +57,7 @@ Now that we have created issues, added fields, selected milestones and added lab
 
 The `Board` option will create a kanban board with a few collumns. You can, of course, add more columns based on your needs. You can change the colors of the columns and select the fields you want to show on the board.
 
-<img src="/images/githubprojectsboard.png" alt="board view" width="400"/>
+<img src="/images/githubprojectsboard.png" alt="board view" width="75%"/>
 
 The `Roadmap` will create a timeline based on the iteration field and the iterations. You can add markers (the Milestones), filter the view and even change the view from Month, to Quater and Year. The view will show `Today` and the naming of the iterations. 
 

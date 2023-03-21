@@ -33,7 +33,7 @@ To add a the issue to an iteration, navigate to the project, open the issue and 
 ## Create an issue
 To transfor this draft into an issue, hover over the issue title and a dropdown arrow in front of the draft will appear. Click on the arrow and select `Convert to issue`. You will be asked to select a repository for this issue. Select one from the pop-up list and the issue will be created and connected to the repository. The default status is now `Todo`. 
 
-<img src="/images/githubprojectslabelsandmilestones.png" alt="labels and milestones" width="400"/>
+<img src="/images/githubprojectslabelsandmilestones.png" alt="labels and milestones" width="75%"/>
 
 ### Labels
 You can add labels, with colors, to the issue. The labels are located in the repository connected to the issue. Navigate to your repository, then click on `Issues`. On the top you will find a search bar, next to the search bar is the number of labels. Click on the button to show all the labels. You can add labels or change the current labels by clicking the `edit` button. You can change the color and add a description. If you want to add an icon, use the collon and select the icon from the list.
@@ -50,7 +50,7 @@ The description field of the issue supports markdown. So if an issues exists out
 
 To assign the tasks to someone, open the issue in the repository it is connected to. Now hover over one of the tasks, you will see a circle button on the left side of the text, if you hover over the button it will say `Convert to issue`. Click the button and the task will become an issue. You can assign the issue to someone. The issue and the task are still connected, you if you close the task the issues is closed and also the other way around. 
 
-<img src="/images/githubprojectsconverttoissue.png" alt="convert task to issue" width="400"/>
+<img src="/images/githubprojectsconverttoissue.png" alt="convert task to issue" width="75%"/>
 
 ## Board views
 Now that we have created issues, added fields, selected milestones and added labels we can create new views on the project board. Click on `New view`, you will get a table view with all the issues. If you want to change the view, click on the dropdown button. You can change the view to look like a `Board` or (if you have an iteration field) `Roadmap`. 
@@ -61,4 +61,4 @@ The `Board` option will create a kanban board with a few collumns. You can, of c
 
 The `Roadmap` will create a timeline based on the iteration field and the iterations. You can add markers (the Milestones), filter the view and even change the view from Month, to Quater and Year. The view will show `Today` and the naming of the iterations. 
 
-<img src="/images/githubprojectsroadmap.png" alt="roadmap view" width="400"/>
+<img src="/images/githubprojectsroadmap.png" alt="roadmap view" width="75%"/>

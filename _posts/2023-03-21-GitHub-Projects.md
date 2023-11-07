@@ -19,7 +19,7 @@ Based on the template you selected, the first project board is created. In this 
 To add an item to the list, type whatever you want to add at the bottom of the list and hit `Enter`. As you will see, the item will appear as `a draft`. This item is in the draft because it is not an issue connected to a repository. 
 
 ## New Fields
-If you create an issue, you will get a number of fields out of the box, like `assignees`. You can add more fields if you want. Navigate to your project. On the left side, click on the `...` button and click `Settings`. On the right is a section called `Custom Fields` where you can add new fields. You can add the name of the field and the type, like `Date`, `Text`, or `Number`. 
+If you create an issue, you will get a number of fields out of the box, like `assignees`. You can add more fields if you want. Navigate to your project. On the left side, click on the `...` button and click `Settings`. On the right is a section called `Custom Fields`, where you can add new fields. You can add the name of the field and the type, like `Date`, `Text`, or `Number`. 
 
 <img src="/images/githubprojectsnewfields.png" alt="new fields"/>
 

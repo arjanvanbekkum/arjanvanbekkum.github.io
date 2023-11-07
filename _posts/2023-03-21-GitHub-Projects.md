@@ -9,7 +9,7 @@ tags: [dotnet, github]
 
 If you have been working with GitHub for a while, you have probably seen the 'old' version of boards and issues. Last year, GitHub released an all-new version of `Projects`. This new version introduces more flexibility than before. As GitHub says, `Built like a spreadsheet, project tables give you a live canvas to filter.` 
 
-So instead of having a board per repository, you can use projects to manage work items over different repositories and track them in one place. 
+So, instead of having a board per repository, you can use projects to manage work items over different repositories and track them in one place. 
 
 ## New Project
 In GitHub, you can navigate to `your projects` to view all the projects you have. Default it will only the open projects. You can create a new project using the `New Project` button.

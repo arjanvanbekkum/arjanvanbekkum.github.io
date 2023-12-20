@@ -1,92 +1,108 @@
 <!DOCTYPE html>
-	<html>
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-		<head>
-			<title>{{ page.title }}</title>
-			<!-- link to main stylesheet -->
-			<link rel="stylesheet" type="text/css" href="/css/main.css">
-			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-		
-			<link rel="icon" href="/images/favicon.png">
-			
-			{% if site.tags != "" %}
-				{% include collecttags.html %}
-		  	{% endif %}
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-			{% seo %}
-			
-			<!-- google analytics -->
-			{% include analytics.html %}
+<head>
+	<title>{{ page.title }}</title>
+	<!-- link to main stylesheet -->
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-				
-		</head>
-		<body>
-			<div class="header">
-				
-				
-				<span>
-					Photo by <a href="https://unsplash.com/@olia?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Olia Gozha</a> on <a href="https://unsplash.com/s/photos/book?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-				</span>
-			</div>
-			<div class="bg-text">
-				<h2>don't think outside of the box, think like there is no box</h2>
-			</div>
-			  
-			<div class="row">
-				<div class="leftcolumn">
-						
-					{{ content }}
-						
-				</div>
-				<div class="rightcolumn">
-			  	<div class="card">
-						<h2>About</h2>
-						<div class="fakeimg" style="height:100px;"><img src="/images/arjan.jpg" alt="arjan" width="100px" style="border-radius: 50%;"></div>
-						<p>I work as a consultant for <a href="http://www.xpirit.com" alt="xpirit" target="blank">Xpirit</a>. I am passionate about problem-solving for customers with the help of technology. 
-						I love to learn new techniques, technologies and ways to improve myself.  
- 						</p>
-				  	</div>
-				  	<div class="card">
-						<h3>Get inspired</h3>
-						<ul>
-							<li><a href="https://devopsjournal.io/" alt="Rob Bos" target="_blank">Rob Bos' Blog</a> </li>
-							<li><a href="https://mindbyte.nl/" alt="MindByte" target="_blank">MindByte</a></li>
-							<li><a href="https://loekd.wordpress.com/" alt="Loek Duys" target="_blank">Loek Duys</a></li>
-							<li><a href="https://jessehouwing.net/" alt="Jesse Houwing" target="_blank">Jesse Houwing</a></li>
-							<li><a href="https://pascalnaber.wordpress.com/" alt="Pascal Naber" target="_blank">Pascal Naber</a></li>
-							<li><a href="https://ericksegaar.com/" alt="Alm by Erick Segaar" target="_blank">Alm by Erick Segaar</a></li>
-							<li><a href="https://blog.sanderaernouts.com/" alt="Sander Aernouts" target="_blank">Sander Aernouts</a></li>
-							<li><a href="https://fullcycledeveloper.com/" alt="Full Cycle Developer" target="_blank">Full Cycle Developer</a></li>
-							<li><a href="https://r-vm.com/" alt="Reinier van Maanen" target="_blank">r-vm.com</a></li>
-							<li><a href="https://roadtoalm.com/" alt="Rene van Osnabrugge" target="_blank">Road To Alm</a></li>
-							<li><a href="https://blog.sluijsveld.com/" alt="Chris van Sluijsveld" target="_blank">Chris van Sluijsveld</a></li>
-							<li><a href="https://jaspergilhuis.nl/" alt="Jasper Gilhuis" target="_blank">Jasper Gilhuis</a></li>
-              				<li><a href="https://marcbruins.nl/" alt="Marc Bruins" target="_blank">Marc Bruins</a></li>
-							<li><a href="https://nielsnijveldt.github.io/"alt="Niels Nijveldt" target="_blank">Niels Nijveldt</a></li>
-						</ul>
-					</div>
-					<div class="card">
-						<h3>Tags</h3>
-						  <ul>
-							{% for tag in page.tags %}
-							{% capture tag_name %}{{ tag }}{% endcapture %}
-							 	<li><a href="/tag/{{ tag_name }}">{{ tag_name }}</a></li> 
-						  {% endfor %}
-						  </ul>	  
-					</div>  
-					<div class="card follow">
-						<ul>
-								<li><a href="https://www.linkedin.com/in/arjanvanbekkum/" alt="linkedIn" target="_blank"><i class="fab fa-linkedin" style="font-size: 3em"></i></a></li>
-								<li><a href="https://github.com/arjanvanbekkum/" alt="GitHub" target="_blank"><i class="fab fa-github-square" style="font-size: 3em"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		  
-			<div class="footer">
-				<a href="https://www.xpirit.com/arjan" alt="Lets engage" target="_blank"><img src="/images/xpiritexportblog.png" alt="Xpirit Blog" width="10%" /></a>
-			</div>
-		</body>
-	</html>
+	<link rel="icon" href="/images/favicon.png">
 
-	
+	{% if site.tags != "" %}
+	{% include collecttags.html %}
+	{% endif %}
+
+	{% seo %}
+
+	<!-- google analytics -->
+	{% include analytics.html %}
+
+
+</head>
+
+<body>
+	<div class="header">
+
+
+		<span>
+			Photo by <a
+				href="https://unsplash.com/@olia?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Olia
+				Gozha</a> on <a
+				href="https://unsplash.com/s/photos/book?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+		</span>
+	</div>
+	<div class="bg-text">
+		<h2>don't think outside of the box, think like there is no box</h2>
+	</div>
+
+	<div class="row">
+		<div class="leftcolumn">
+
+			{{ content }}
+
+		</div>
+		<div class="rightcolumn">
+			<div class="card">
+				<h2>About</h2>
+				<div class="fakeimg" style="height:100px;"><img src="/images/arjan.jpg" alt="arjan" width="100px"
+						style="border-radius: 50%;"></div>
+				<p>I work as a consultant for <a href="http://www.xebia.com" alt="xebia" target="blank">Xebia</a>. I am
+					passionate about problem-solving for customers with the help of technology.
+					I love to learn new techniques, technologies and ways to improve myself.
+				</p>
+			</div>
+			<div class="card">
+				<h3>Get inspired</h3>
+				<ul>
+					<li><a href="https://devopsjournal.io/" alt="Rob Bos" target="_blank">Rob Bos' Blog</a> </li>
+					<li><a href="https://mindbyte.nl/" alt="MindByte" target="_blank">MindByte</a></li>
+					<li><a href="https://loekd.wordpress.com/" alt="Loek Duys" target="_blank">Loek Duys</a></li>
+					<li><a href="https://jessehouwing.net/" alt="Jesse Houwing" target="_blank">Jesse Houwing</a></li>
+					<li><a href="https://pascalnaber.wordpress.com/" alt="Pascal Naber" target="_blank">Pascal Naber</a>
+					</li>
+					<li><a href="https://ericksegaar.com/" alt="Alm by Erick Segaar" target="_blank">Alm by Erick
+							Segaar</a></li>
+					<li><a href="https://blog.sanderaernouts.com/" alt="Sander Aernouts" target="_blank">Sander
+							Aernouts</a></li>
+					<li><a href="https://fullcycledeveloper.com/" alt="Full Cycle Developer" target="_blank">Full Cycle
+							Developer</a></li>
+					<li><a href="https://r-vm.com/" alt="Reinier van Maanen" target="_blank">r-vm.com</a></li>
+					<li><a href="https://roadtoalm.com/" alt="Rene van Osnabrugge" target="_blank">Road To Alm</a></li>
+					<li><a href="https://blog.sluijsveld.com/" alt="Chris van Sluijsveld" target="_blank">Chris van
+							Sluijsveld</a></li>
+					<li><a href="https://jaspergilhuis.nl/" alt="Jasper Gilhuis" target="_blank">Jasper Gilhuis</a></li>
+					<li><a href="https://marcbruins.nl/" alt="Marc Bruins" target="_blank">Marc Bruins</a></li>
+					<li><a href="https://nielsnijveldt.github.io/" alt="Niels Nijveldt" target="_blank">Niels
+							Nijveldt</a></li>
+				</ul>
+			</div>
+			<div class="card">
+				<h3>Tags</h3>
+				<ul>
+					{% for tag in page.tags %}
+					{% capture tag_name %}{{ tag }}{% endcapture %}
+					<li><a href="/tag/{{ tag_name }}">{{ tag_name }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="card follow">
+				<ul>
+					<li><a href="https://www.linkedin.com/in/arjanvanbekkum/" alt="linkedIn" target="_blank"><i
+								class="fab fa-linkedin" style="font-size: 3em"></i></a></li>
+					<li><a href="https://github.com/arjanvanbekkum/" alt="GitHub" target="_blank"><i
+								class="fab fa-github-square" style="font-size: 3em"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<a href="https://www.xebia.com" alt="xebia" target="_blank"><img src="/images/xpiritexportblog.png"
+				alt="Xprt Blog" width="10%" /></a>
+	</div>
+</body>
+
+</html>

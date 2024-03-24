@@ -4,15 +4,13 @@ title: Arjans Blog
 tags: [aws, azure, devops, powershell, cloudformation, dotnet]
 ---
 <ul class="posts">
-		{% for post in site.posts %}
- 			<div class="card">
-          		<h3>{{ post.title }}</h3>
-				<h5>{{ post.date | date_to_string }} | <i class="far fa-clock" aria-hidden="true"></i> {{ post.minute }} minute read </h5>
-				<p>{{ post.summary }}</p>
-				<a href="{{ post.url }}" title="{{ post.title }}">read more..</a>
-			</div>
-	  {% endfor %}
-	</ul>
-  
-
-
+	{% for post in site.posts %}
+	<div class="card">
+		<h3>{{ post.title }}</h3>
+		<h5>{{ post.date | date_to_string }} | <i class="far fa-clock" aria-hidden="true"></i> {{ post.minute }} minute
+			read </h5>
+		<p>{{ post.summary }}</p>
+		<a href="{{ post.url }}" title="{{ post.title }}">read more..</a>
+	</div>
+	{% endfor %}
+</ul>
